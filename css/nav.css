@@ -10,11 +10,13 @@ nav {
 
 .navbar-brand {
   font-weight: bold;
+  padding: 15px;
 }
 
 .nav-link {
   font-size: 0.85rem;
   margin: 0 3px;
+  cursor: pointer;
 }
 
 .nav-right {

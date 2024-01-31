@@ -30,10 +30,21 @@
   text-decoration: none;
 }
 
-.story-author {
+.story-author, .story-user {
   margin-left: 2em;
 }
 
+.story-author {
+  color: green;
+}
 .story-user {
-  display: block;
+  color: orange;
+}
+
+.star, .delete {
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: red;
 }

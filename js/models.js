@@ -24,8 +24,7 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return new URL(this.url).host;
   }
 }
 
@@ -73,11 +72,39 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory( user, {title, author, url}) {
+    const token = user.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/stories`,
+      method: "POST",
+      data: {token, story: {title, author, url}},
+    });
+    const newStory = new Story(response.data.story);
+    this.stories.unshift(newStory);
+    user.ownStories.unshift(newStory);
+    return newStory;
+  }
+
+  /** Deletes story data from API and removes it from story list.
+   * - user - the current instance of User
+   * - storyId - the ID of the story to remove
+   */
+  async removeStory(user, storyId) {
+    const token = user.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: {token},
+    });
+
+    // Filter out the story to remove
+    this.stories = this.stories.filter(s => s.storyId !== storyId);
+
+    // Remove it from the user's own stories and their favorites
+    user.ownStories = user.ownStories.filter(s => s.storyId !== storyId);
+    user.favorites = user.favorites.filter(s => s.storyId !== storyId);
   }
 }
-
 
 /******************************************************************************
  * User: a user in the system (only used to represent the current user)
@@ -192,5 +219,38 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  /** Deal with the user's favorite and unfavorites, including:
+   * - What is stored in the API
+   * - The current user's favorites
+   */
+
+  /** Favorite a story to the list of user favorites */
+  async favoriteStory(story) {
+    this.favorites.push(story);
+    await this.favoriteOrUnfavoriteStory("favorite", story);
+  }
+
+  /** Unfavorite a story to the list of user favorites */
+  async unfavoriteStory(story) {
+    this.favorites = this.favorites.filter(s => s.storyId !== story.storyId);
+    await this.favoriteOrUnfavoriteStory("unfavorite", story);
+  }
+
+  /** Allow users to favorite or unfavorite a story */
+  async favoriteOrUnfavoriteStory(state, story) {
+    const method = state === "favorite" ? "POST" : "DELETE"
+    const token = this.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+      method: method,
+      data: { token }
+    });
+  }
+
+  /** Return true or false if story is a favorite of the user. */
+  isFavorite(story) {
+    return this.favorites.some(s => (s.storyId === story.storyId));
   }
 }

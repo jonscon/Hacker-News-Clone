@@ -3,6 +3,7 @@
 body {
   font-family: Arimo, sans-serif;
   margin: 8px 7.5vw;
+  background-image: radial-gradient(#d9b8d3 5%, #adbcf0 95%);
 }
 
 h1 {
@@ -28,6 +29,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+ 
+small {
+  font-size: 0.7rem;
+}
 
 
 /* Site layout */
@@ -47,10 +52,11 @@ a:hover {
 
 /* Forms */
 
-form {
+form:not(#submit-form) {
   display: flex;
   flex-direction: column;
   margin: 8px 18px 0;
+  background-color: #f6f6ef;
 }
 
 form > * {
@@ -104,6 +110,13 @@ form > hr {
 
 .login-input label {
   width: 70px;
+}
+
+#submit-form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #f6f6ef;
 }
 
 

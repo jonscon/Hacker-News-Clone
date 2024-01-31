@@ -1,5 +1,9 @@
 "use strict";
 
+/** TO-DO: ADD STYLING FOR ENTIRE PAGE
+ * 
+ */
+
 /******************************************************************************
  * Handling navbar clicks and updating navbar
  */
@@ -10,9 +14,37 @@ function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
   putStoriesOnPage();
+  if (!$submitForm.hasClass("hidden")) {
+    $submitForm.addClass("hidden");
+  }
 }
 
 $body.on("click", "#nav-all", navAllStories);
+
+/** Show form to submit a new story */
+function navSubmitClick(evt) {
+  hidePageComponents();
+  $submitForm.show();
+  putStoriesOnPage();
+}
+
+$navSubmit.on("click", navSubmitClick);
+
+/** Show list of favorites */
+function navFavoritesClick(evt) {
+  hidePageComponents();
+  putFavoritesOnPage();
+}
+
+$navFavorites.on("click", navFavoritesClick);
+
+/** Show list of the user's own stories */
+function navMyStories(evt) {
+  hidePageComponents();
+  putMyStoriesOnPage();
+}
+
+$navMyStories.on("click", navMyStories);
 
 /** Show login/signup on click on "login" */
 
