@@ -9,10 +9,7 @@
 function navAllStories(evt) {
   // console.debug("navAllStories", evt);
   hidePageComponents();
-  putStoriesOnPage();
-  if (!$submitForm.hasClass("hidden")) {
-    $submitForm.addClass("hidden");
-  }
+  putStoriesOnPage()
 }
 
 $body.on("click", "#nav-all", navAllStories);

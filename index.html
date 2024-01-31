@@ -53,22 +53,26 @@
 </nav>
 
 <!-- submit form -->
-<form class="hidden" id="submit-form">
-  <div>
-    <label class="submit-label">author</label>
-    <input id="submit-story-author" class="submit-input" type="text" align="left" required>
-  </div>
-  <div>
-    <label class="submit-label">title</label>
-    <input id="submit-story-title" class="submit-input" type="text" align="left" required>
-  </div>
-  <div>
-    <label class="submit-label">url</label>
-    <input id="submit-story-url" class="submit-input" type="url" align="left" required>
-  </div>
-  <button type="submit">submit</button>
-  <hr style="width:90%;margin:auto">
-</form>
+<section class="submit-form-container container">
+
+  <form id="submit-form" class="hidden">
+    <div>
+      <label class="submit-label">author</label>
+      <input id="submit-story-author" class="submit-input" type="text" align="left" required>
+    </div>
+    <div>
+      <label class="submit-label">title</label>
+      <input id="submit-story-title" class="submit-input" type="text" align="left" required>
+    </div>
+    <div>
+      <label class="submit-label">url</label>
+      <input id="submit-story-url" class="submit-input" type="url" align="left" required>
+    </div>
+    <button type="submit">submit</button>
+    <hr style="width:95%;margin:auto">
+  </form>
+  
+</section>
 
 
 <!-- area for stories (all stories, user stories, favorites) -->

@@ -49,10 +49,9 @@ small {
   display: none;
 }
 
-
 /* Forms */
 
-form:not(#submit-form) {
+form {
   display: flex;
   flex-direction: column;
   margin: 8px 18px 0;
@@ -111,14 +110,6 @@ form > hr {
 .login-input label {
   width: 70px;
 }
-
-#submit-form {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background-color: #f6f6ef;
-}
-
 
 /* responsive queries for tightening things up for mobile. */
 
