@@ -9,7 +9,7 @@
      - Michael Hueter: initial creation, 2018
      - Elie Schoppik: refactoring using OO, 2019
      - Joel Burton: refactored and componentized, 2020
-     - You!
+     - Jonathan Cheng: 2024!
   -->
 
 <html lang="en">
@@ -52,6 +52,7 @@
   </div>
 </nav>
 
+<!-- submit form -->
 <form class="hidden" id="submit-form">
   <div>
     <label class="submit-label">author</label>
@@ -126,6 +127,19 @@
     </div>
     <button type="submit">create account</button>
   </form>
+</section>
+
+<!-- User profile -->
+
+<section id="user-profile" class="hidden">
+  <div class="user-profile-box container">
+    <h4>User Profile Info</h4>
+    <section id="user-info">
+      <div>Name: <span id="profile-name">Name:</span></div>
+      <div>Username: <span id="profile-username">Username:</span></div>
+      <div>Account Created: <span id="profile-account-date"></span></div>
+    </section>
+  </div>
 </section>
 
 <!-- Library JS & our JS -->

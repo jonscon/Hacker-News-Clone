@@ -43,7 +43,7 @@ function generateStoryMarkup(story, showDeleteBtn = false) {
 }
 
 /******************************************************************************
- * Determines the HTML needed for a delete button or star button to be added
+ * Creates the HTML needed for a delete button or star button
  */
 
 /** Delete button HTML */
@@ -67,7 +67,7 @@ function starHTML(story, user) {
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
-  console.debug("putStoriesOnPage");
+  // console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
 
@@ -105,9 +105,7 @@ $submitForm.on("submit", submitStory);
 /** Show user's favorites on page  */
 function putFavoritesOnPage() {
   $favoritesList.empty();
-  console.log(currentUser.favorites);
   if (currentUser.favorites.length === 0) {
-    // console.log("no favorites");
     $favoritesList.append("<h5>No favorites added!</h5>");
   }
   else {
@@ -123,16 +121,16 @@ function putFavoritesOnPage() {
 
 async function toggleStoryFavorite(evt) {
   const $tgt = $(evt.target);
-  const $closestLi = $tgt.closest("li");
-  const storyId = $closestLi.attr("id");
-  const story = storyList.stories.find(s => s.storyId === storyId);
+  const $closestLi = $tgt.closest("li"); // closest LI from the star
+  const storyId = $closestLi.attr("id"); // the ID of the LI, which is story ID
+  const story = storyList.stories.find(s => s.storyId === storyId); // find the story with the same story ID
   
-  // Is not a favorite yet (regular star -> solid star)
+  // Is not a favorite yet (empty star -> solid star)
   if ($tgt.hasClass("far")) {
     await currentUser.favoriteStory(story);
     $tgt.closest("i").toggleClass("far fas");
   }
-  // Is currently a favorite (solid star -> regular star)
+  // Is currently a favorite (solid star -> empty star)
   else {
     await currentUser.unfavoriteStory(story);
     $tgt.closest("i").toggleClass("fas far");
@@ -147,7 +145,6 @@ $storiesList.on("click", ".star", toggleStoryFavorite);
 
 function putMyStoriesOnPage() {
   $ownStories.empty();
-  console.log(currentUser.ownStories);
   if (currentUser.ownStories.length === 0) {
     $ownStories.append("<h5>No stories added by user yet!</h5>");
   }
@@ -163,8 +160,8 @@ function putMyStoriesOnPage() {
 /** Handle when user wants to delete a story */
 async function deleteStory(evt) {
   const $tgt = $(evt.target);
-  const $closestLi = $tgt.closest("li");
-  const storyId = $closestLi.attr("id");
+  const $closestLi = $tgt.closest("li"); // closest LI from the star
+  const storyId = $closestLi.attr("id"); // the ID of the LI, which is story ID
   
   await storyList.removeStory(currentUser, storyId); // Call the removeStory method on the storyList
   

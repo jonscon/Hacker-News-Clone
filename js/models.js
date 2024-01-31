@@ -28,7 +28,6 @@ class Story {
   }
 }
 
-
 /******************************************************************************
  * List of Story instances: used by UI to show story lists in DOM.
  */

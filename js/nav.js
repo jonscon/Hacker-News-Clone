@@ -1,17 +1,13 @@
 "use strict";
 
-/** TO-DO: ADD STYLING FOR ENTIRE PAGE
- * 
- */
-
 /******************************************************************************
  * Handling navbar clicks and updating navbar
  */
 
-/** Show main list of all stories when click site name */
+/** Show main list of all stories when user clicks site name */
 
 function navAllStories(evt) {
-  console.debug("navAllStories", evt);
+  // console.debug("navAllStories", evt);
   hidePageComponents();
   putStoriesOnPage();
   if (!$submitForm.hasClass("hidden")) {
@@ -49,7 +45,7 @@ $navMyStories.on("click", navMyStories);
 /** Show login/signup on click on "login" */
 
 function navLoginClick(evt) {
-  console.debug("navLoginClick", evt);
+  // console.debug("navLoginClick", evt);
   hidePageComponents();
   $loginForm.show();
   $signupForm.show();
@@ -57,10 +53,18 @@ function navLoginClick(evt) {
 
 $navLogin.on("click", navLoginClick);
 
+/** Show user profile on username click */
+function navUsernameClick(evt) {
+  hidePageComponents();
+  $userProfile.show();
+}
+
+$navUserProfile.on("click", navUsernameClick);
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
-  console.debug("updateNavOnLogin");
+  // console.debug("updateNavOnLogin");
   $(".main-nav-links").show();
   $navLogin.hide();
   $navLogOut.show();
